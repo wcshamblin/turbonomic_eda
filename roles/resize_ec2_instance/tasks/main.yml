@@ -1,0 +1,39 @@
+---
+- name: Gather information about a particular instance using it's instance ID
+  amazon.aws.ec2_instance_info:
+    region: "{{ ec2_region | regex_search('(?<=::)[^::]*') }}"
+    instance_ids:
+      - "{{ instance_id }}"
+  register: resize_ec2_instance_vm_info
+- name: Resize EC2 Instance if the recommended instance type does not match the current instance type
+  when: instance_type != resize_ec2_instance_vm_info['instances'][0]['instance_type']
+  block:
+    - name: Shutdown the EC2 Instance
+      amazon.aws.ec2_instance:
+        region: "{{ ec2_region | regex_search('(?<=::)[^::]*') }}"
+        instance_ids:
+          - "{{ instance_id }}"
+        instance_type: "{{ resize_ec2_instance_vm_info['instances'][0]['instance_type'] }}"
+        state: stopped
+        wait: true
+        changed_when: false
+    - name: Resize EC2 Instance
+      # Current ec2_instance module does not support modifying the instance type so using CLI via command
+      # https://github.com/ansible-collections/amazon.aws/issues/469
+      ansible.builtin.command:
+        cmd: >
+          aws ec2 modify-instance-attribute
+          --region "{{ ec2_region | regex_search('(?<=::)[^::]*') }}"
+          --instance-id "{{ instance_id }}"
+          --instance-type "{{ instance_type }}"
+      changed_when: true
+    - name: Startup EC2 Instance
+      amazon.aws.ec2_instance:
+        region: "{{ ec2_region | regex_search('(?<=::)[^::]*') }}"
+        instance_ids:
+          - "{{ instance_id }}"
+        instance_type: "{{ resize_ec2_instance_vm_info['instances'][0]['instance_type'] }}"
+        # Production should use started to ensure status checks
+        state: started
+        # state: running
+        wait: true

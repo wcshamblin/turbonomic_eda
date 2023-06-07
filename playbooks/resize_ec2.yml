@@ -1,0 +1,5 @@
+- name: Resize EC2 Instance from Turbonomic Recommendation via Event Driven Ansible
+  hosts: all
+  gather_facts: false
+  roles:
+    - ibm.turbonomic_eda.resize_ec2_instance

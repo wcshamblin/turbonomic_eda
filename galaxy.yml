@@ -1,0 +1,32 @@
+namespace: ibm
+name: turbonomic_eda
+version: 1.0.0
+readme: README.md
+authors:
+  - Ray Mileo <ray.mileo@ibm.com>
+  - Anshuman Biswas <Anshuman.Biswas@ibm.com>
+  - Joseph Mate <Joseph.Mate@ibm.com>
+  - Simon Ravenscroft <simon.ravenscroft@ibm.com>
+description: >
+  This IBM Turbonomic Ansible Collection provides examples that can be used to
+  automate Turbonomic cloud scaling decisions using Event Driven Ansible (EDA). Users are
+  able to quickly realize the value of Turbonomic Hybrid Cloud optimization decisions by
+  leveraging the flexible and powerful automation capabilities of Event Driven Ansible.
+license:
+  - Apache-2.0
+license_file: ''
+tags:
+  - application
+  - cloud
+  - infrastructure
+  - turbonomic
+  - eda
+dependencies:
+  "azure.azcollection": "*"
+  "amazon.aws": "*"
+  "ansible.eda": "*"
+repository: https://github.com/IBM/turbonomic_ansible_eda
+documentation: https://github.com/IBM/turbonomic_ansible_eda
+homepage: https://www.ibm.com/products/turbonomic
+issues: https://github.com/IBM/turbonomic_ansible_eda/issues
+build_ignore: []

@@ -1,0 +1,5 @@
+- name: Resize Azure Virtual Machine from Turbonomic Recommendation via Event Driven Ansible
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - ibm.turbonomic_eda.resize_azure_instance

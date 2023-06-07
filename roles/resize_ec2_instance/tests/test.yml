@@ -1,0 +1,6 @@
+---
+- name: Resize AWS ec2 instance test
+  hosts: localhost
+  remote_user: root
+  roles:
+    - resize_ec2_instance

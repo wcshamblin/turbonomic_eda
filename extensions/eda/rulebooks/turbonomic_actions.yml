@@ -1,0 +1,29 @@
+---
+- name: Read messages from a Turbonomic webhook and act on them
+  hosts: localhost
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+
+  rules:
+    - name: Run EC2 Playbook for Virtual Machine Scale Action
+      condition: event.payload.target.className == "VirtualMachine" and event.payload.actionType == "SCALE" and
+        event.payload.target.environmentType == "CLOUD" and event.payload.target.discoveredBy.type == "AWS"
+      action:
+        run_playbook:
+          name: ibm.turbonomic_eda.resize_ec2
+          extra_vars:
+            instance_type: "{{ event['payload']['newEntity']['displayName'] }}"
+            instance_id: "{{ event['payload']['target']['vendorIds'][event['payload']['target']['discoveredBy']['displayName']] }}"
+            ec2_region: "{{ event['payload']['currentLocation']['vendorIds'][event['payload']['currentLocation']['discoveredBy']['displayName']] }}"
+    - name: Run Azure Playbook for Virtual Machine Scale Action
+      condition: event.payload.target.className == "VirtualMachine" and event.payload.actionType == "SCALE" and
+        event.payload.target.environmentType == "CLOUD" and event.payload.target.discoveredBy.type == "Azure Subscription"
+      action:
+        run_playbook:
+          name: ibm.turbonomic_eda.resize_azure
+          extra_vars:
+            resource_group: "{{ event['payload']['target']['aspects']['resourceGroup']['displayName'] }}"
+            instance_size: "{{ event['payload']['newEntity']['displayName'] }}"
+            instance_name: "{{ event['payload']['target']['displayName'] }}"

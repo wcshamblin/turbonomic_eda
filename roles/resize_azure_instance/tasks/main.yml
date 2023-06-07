@@ -1,0 +1,7 @@
+---
+- name: Resize Azure Instance
+  azure.azcollection.azure_rm_virtualmachine:
+    resource_group: "{{ resource_group }}"
+    name: "{{ instance_name }}"
+    vm_size: "{{ instance_size }}"
+    state: present

@@ -1,0 +1,28 @@
+ancestor: null
+releases:
+  1.0.0:
+    release_date: '2023-06-05'
+    changes:
+      release_summary: This is the initial release of the collection and
+        includes a example Event Driven Ansible rulebook
+    modules:
+      - name: eda_webhook
+        description: Module to create a webhook in Turbonomic
+        namespace: ''
+    objects:
+      role:
+        - name: resize_azure_instance
+          description: Role to resize a Azure Virtual Machine
+          namespace: null
+        - name: resize_ec2_instance
+          description: Role to resize a AWS EC2 Instance
+          namespace: null
+      playbook:
+        - name: resize_azure
+          description: Playbook to call resize_azure_instance role for Event
+            Driven Ansible rulebook
+          namespace: null
+        - name: resize_ec2
+          description: Playbook to call resize_ec2_instance role for Event
+            Driven Ansible rulebook
+          namespace: null

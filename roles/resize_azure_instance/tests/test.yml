@@ -1,0 +1,6 @@
+---
+- name: Resize Azure instance test
+  hosts: localhost
+  remote_user: root
+  roles:
+    - resize_azure_instance

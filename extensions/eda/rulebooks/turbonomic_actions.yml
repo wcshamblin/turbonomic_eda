@@ -12,6 +12,7 @@
         event.payload.target.environmentType == "CLOUD" and event.payload.target.discoveredBy.type == "AWS"
       action:
         run_job_template:
+          organization: 'Default'
           name: ibm.turbonomic_eda.resize_ec2
           extra_vars:
             instance_type: "{{ event['payload']['newEntity']['displayName'] }}"
@@ -22,6 +23,7 @@
         event.payload.target.environmentType == "CLOUD" and event.payload.target.discoveredBy.type == "Azure Subscription"
       action:
         run_job_template:
+          organization: 'Default'
           name: ibm.turbonomic_eda.resize_azure
           extra_vars:
             resource_group: "{{ event['payload']['target']['aspects']['resourceGroup']['displayName'] }}"

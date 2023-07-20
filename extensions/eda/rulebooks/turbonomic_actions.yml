@@ -11,7 +11,7 @@
       condition: event.payload.target.className == "VirtualMachine" and event.payload.actionType == "SCALE" and
         event.payload.target.environmentType == "CLOUD" and event.payload.target.discoveredBy.type == "AWS"
       action:
-        run_playbook:
+        run_job_template:
           name: ibm.turbonomic_eda.resize_ec2
           extra_vars:
             instance_type: "{{ event['payload']['newEntity']['displayName'] }}"
@@ -21,7 +21,7 @@
       condition: event.payload.target.className == "VirtualMachine" and event.payload.actionType == "SCALE" and
         event.payload.target.environmentType == "CLOUD" and event.payload.target.discoveredBy.type == "Azure Subscription"
       action:
-        run_playbook:
+        run_job_template:
           name: ibm.turbonomic_eda.resize_azure
           extra_vars:
             resource_group: "{{ event['payload']['target']['aspects']['resourceGroup']['displayName'] }}"

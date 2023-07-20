@@ -13,7 +13,7 @@
       action:
         run_job_template:
           organization: 'Default'
-          name: ibm.turbonomic_eda.resize_ec2
+          name: resize_ec2
           extra_vars:
             instance_type: "{{ event['payload']['newEntity']['displayName'] }}"
             instance_id: "{{ event['payload']['target']['vendorIds'][event['payload']['target']['discoveredBy']['displayName']] }}"
@@ -24,7 +24,7 @@
       action:
         run_job_template:
           organization: 'Default'
-          name: ibm.turbonomic_eda.resize_azure
+          name: resize_azure
           extra_vars:
             resource_group: "{{ event['payload']['target']['aspects']['resourceGroup']['displayName'] }}"
             instance_size: "{{ event['payload']['newEntity']['displayName'] }}"

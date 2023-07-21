@@ -3,10 +3,8 @@
   gather_facts: false
 
   tasks:
-    - name: Print all extra_vars
-      ansible.builtin.debug:
-        msg: "{{ extra_vars }}"
-
-    - name: Print all job_args
-      ansible.builtin.debug:
-        msg: "{{ job_args }}"
+    # print ALL variables passed to the playbook
+    - name: Print all extra_vars and job_args
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ lookup('vars', 'vars') }}"

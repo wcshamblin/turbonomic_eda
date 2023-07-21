@@ -3,8 +3,6 @@
   gather_facts: false
 
   tasks:
-    # print ALL variables passed to the playbook
-    - name: Print all extra_vars and job_args
+    - name: Print reigon, instance_id
       debug:
-        msg: "{{ item }}"
-      loop: "{{ lookup('vars', 'vars') }}"
+        msg: "{{ region }} {{ instance_id }}"

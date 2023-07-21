@@ -1,7 +1,12 @@
 - name: Print all extra_vars and job_args
   hosts: all
   gather_facts: false
-  
-  debug:
-    msg: "{{ item }}"
-  loop: "{{ extra_vars | dict2items }} + {{ job_args | dict2items }}"
+
+  tasks:
+    - name: Print all extra_vars
+      ansible.builtin.debug:
+        msg: "{{ extra_vars }}"
+
+    - name: Print all job_args
+      ansible.builtin.debug:
+        msg: "{{ job_args }}"

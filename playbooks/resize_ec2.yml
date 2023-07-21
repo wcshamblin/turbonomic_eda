@@ -2,4 +2,4 @@
   hosts: all
   gather_facts: false
   roles:
-    - ibm.turbonomic_eda.resize_ec2_instance
+    - resize_ec2_instance

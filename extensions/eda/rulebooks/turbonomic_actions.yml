@@ -22,6 +22,9 @@
             instance_type: "{{ event['payload']['newEntity']['displayName'] }}"
             instance_id: "{{ event['payload']['target']['vendorIds'][event['payload']['target']['discoveredBy']['displayName']] }}"
             ec2_region: "{{ event['payload']['currentLocation']['vendorIds'][event['payload']['currentLocation']['discoveredBy']['displayName']] }}"
+          facts:
+            instance_type: "{{ event['payload']['newEntity']['displayName'] }}"
+            instance_id: "{{ event['payload']['target']['vendorIds'][event['payload']['target']['discoveredBy']['displayName']] }}"
     - name: Run Azure Playbook for Virtual Machine Scale Action
       condition: event.payload.target.className == "VirtualMachine" and event.payload.actionType == "SCALE" and
         event.payload.target.environmentType == "CLOUD" and event.payload.target.discoveredBy.type == "Azure Subscription"

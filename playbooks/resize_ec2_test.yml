@@ -1,5 +1,4 @@
----
-Resize EC2 Instance from Turbonomic Recommendation via Event Driven Ansible
+- name: Resize EC2 Instance from Turbonomic Recommendation via Event Driven Ansible
   hosts: all
   gather_facts: false
   tasks:
